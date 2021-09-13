@@ -1,7 +1,9 @@
 let timerEl = document.querySelector('.timer'),
     letterDisplayEl = document.querySelector('.letterDisplay'),
+    winsDisplayEl = document.querySelector('.wins'),
+    lossesDisplayEl = document.querySelector('.losses'),
     guessWord = 'markdown',
-    guessWordArray = guessWord.split('');
+    guessWordArray = guessWord.split(''),
     winLossCount = {
         wins: 0,
         losses: 0
@@ -9,7 +11,8 @@ let timerEl = document.querySelector('.timer'),
 
 function countdown() {
     addBlankSpaces();
-    let timeLeft = 60;
+    keydownCheck();
+    let timeLeft = 10;
     let timeInterval = setInterval(function () {
         if (timeLeft > 0) {
             timeLeft--;
@@ -17,6 +20,8 @@ function countdown() {
         } else {
             timerEl.textContent = `Time's up`
             clearInterval(timeInterval);
+            guessCheck();
+            removeEls();
         }
     }, 1000)
 }
@@ -26,6 +31,7 @@ function addBlankSpaces() {
         let newP = document.createElement('p');
         letterDisplayEl.appendChild(newP);
         newP.textContent = ' _ ';
+        newP.classList.add('temp')
         newP.setAttribute('data-index', i)
     }
 }
@@ -40,7 +46,30 @@ function keydownCheck() {
     })
 }
 
+function guessCheck() {
+    let inputCheck = '';
+    for (let i = 0; i < guessWord.length; i++) {
+        inputCheck += letterDisplayEl.children[i].textContent
+    }
+    if (inputCheck === guessWord) {
+        timerEl.textContent = `You win! The word was ${guessWord}`;
+        removeEls();
+        winLossCount.wins++;
+        winsDisplayEl.textContent = `Wins: ${winLossCount.wins}`;
+    } else {
+        timerEl.textContent = `You lost. The word was ${guessWord}`;
+        removeEls();
+        winLossCount.losses++;
+        lossesDisplayEl.textContent = `Losses: ${winLossCount.losses}`;
+    }
+}
+
+function removeEls() {
+    letterDisplayEl.innerHTML = '';
+}
+
 
 
 document.querySelector('.startButton').addEventListener('click', countdown);
-document.querySelector('.startButton').addEventListener('click', keydownCheck);
+
+
