@@ -2,7 +2,7 @@ let timerEl = document.querySelector('.timer'),
     letterDisplayEl = document.querySelector('.letterDisplay'),
     winsDisplayEl = document.querySelector('.wins'),
     lossesDisplayEl = document.querySelector('.losses'),
-    guessWord = 'markdown',
+    guessWord = 'javascript',
     guessWordArray = guessWord.split(''),
     winLossCount = {
         wins: 0,
@@ -10,10 +10,19 @@ let timerEl = document.querySelector('.timer'),
     };
 
 function countdown() {
+    removeEls();
     addBlankSpaces();
     keydownCheck();
+
     let timeLeft = 10;
     let timeInterval = setInterval(function () {
+        function endFunc() {
+            clearInterval(timeInterval);
+            removeEls();
+            addBlankSpaces();
+            keydownCheck();
+            timerEl.innerHTML = `10 second(s) remaining`;
+        }
         if (timeLeft > 0) {
             timeLeft--;
             timerEl.innerHTML = `${timeLeft} second(s) remaining` 
@@ -23,6 +32,7 @@ function countdown() {
             guessCheck();
             removeEls();
         }
+        document.querySelector('.startButton').addEventListener('click', endFunc);
     }, 1000)
 }
 
@@ -67,7 +77,11 @@ function guessCheck() {
 function removeEls() {
     letterDisplayEl.innerHTML = '';
 }
-
+function endFunc() {
+    clearInterval(timeInterval);
+    guessCheck();
+    removeEls();
+}
 
 
 document.querySelector('.startButton').addEventListener('click', countdown);
