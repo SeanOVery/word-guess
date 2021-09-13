@@ -1,0 +1,39 @@
+body {
+    margin: 0;
+}
+
+header {
+    margin: 0;
+    height: 5rem;
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main div {
+    height: 20rem;
+    width: 45%;
+    border: 3px solid black;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.start {
+    border: none;
+}
+.startButton {
+    width: 25%;
+    height: 25%;
+    background-color: black;
+    
+    color: white;
+}
