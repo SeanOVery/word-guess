@@ -37,3 +37,39 @@ main div {
     
     color: white;
 }
+
+.timer {
+    font-size: 2rem;
+    border: none;
+}
+
+.winLossTable {
+    font-size: 2rem;
+    border: none;
+}
+
+.winLossTable ul {
+    list-style-type: none;
+}
+
+.letterDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+}
+
+.letterDisplay p {
+    display: inline;
+    border: 1px solid blue;
+    font-size: 2rem;
+    padding: 0 1rem;
+    margin: 1rem;
+}
+
+footer {
+    margin: 0;
+    height: 5rem;
+    background-color: black;
+    color: white;
+}
